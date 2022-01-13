@@ -66,7 +66,7 @@ function createAccountPage() {
           <InputForm className="input-form-create" id="username-create" name="username" label="Username"  handleInput={handleInput} value={formLogin.username}/>
           <InputForm className="input-form-create" id="email-create" type="email" name="email" label="Email"  handleInput={handleInput} value={formLogin.email}/>
           <InputForm className="input-form-create" id="password-create" type="password" name="password" label="Password"  handleInput={handleInput} value={formLogin.password} />
-          <InputForm className="input-form-create" id="passwor-confirmation" type="password" name="confirmPassword" label="Repeat Password"  handleInput={handleInput} value={formLogin.confirmPassword}/>
+          <InputForm className="input-form-create" id="password-confirmation" type="password" name="confirmPassword" label="Repeat Password"  handleInput={handleInput} value={formLogin.confirmPassword}/>
           <ProceedBtn btnId="btn-register" text="Register" />
         </Form>
         </CreateAccountForms>
