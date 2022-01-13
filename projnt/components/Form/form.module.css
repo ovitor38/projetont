@@ -1,0 +1,13 @@
+
+.form {
+    flex: 1;
+    display: flex;
+}
+
+.formVertical {
+    flex-direction: column;
+}
+
+.formHorizontal{
+    flex-direction: row;
+}

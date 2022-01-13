@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&display=swap');
+
+:root{
+    --base-text-size: 6;
+
+    /*colors*/
+    --cor0: #FFFFFF;
+    --cor1: #7FA1FF;
+    --cor2: #527AE6;
+    --cor3: #707070;
+    --cor4: #474A51;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Raleway, sans-serif
+}
+
+.container-index {
+    display: flex;
+}
+
+.login-logo {
+    width: 50%;
+    height: 100vh;
+    background-color:var(--cor1) ;
+    display: inline-block;
+    border-radius: 0 0 270px;    
+    
+}
+
+.login-logo > section{
+    text-align: center;
+    padding-top:20%;    
+}
+
+.login-image{
+    text-align:center;
+    position: relative;
+    top: 190px  
+}
+
+.login-side{
+    width: 50%;
+    height: 100vh;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;         
+}
+
+.login-box {
+    width: 574px;
+    height: 657px;    
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.login-head h3{
+    color: var(--cor1);
+    text-align: left;
+    font-size: 48px;
+    font-weight: 900 ;
+}
+
+.login-head p{
+    color: var(--cor3);
+    font-size: 24px;
+    
+}
+
+.input-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    
+}
+
+.input-form label{
+    color: var(--cor3);
+    font-size: 24px;            
+}
+
+#username{
+   height: 65px;
+   font-size: 30px;  
+   text-align: left;
+   position: relative;
+   top: 40px;
+   border-radius: 8px;
+}
+
+#username label{
+    position: relative;
+    top: 40px;
+}
+
+#password{
+   height: 65px;
+   font-size: 30px;  
+   text-align: left;
+   border-radius: 8px;
+}
+
+
+.remember-box {    
+    color: var(--cor3);
+    font-size: 18px;
+    position: relative;
+    top: -110px;  
+    font-weight:400 ;
+     
+}
+
+
+.btn-container {
+   text-align: center;
+   position: relative;
+   top: -90px;   
+}
+
+#btn-login{
+    font-size:  calc(var(--base-text-size)*5px);
+    cursor: pointer;
+    color: white;
+    border-color:   var(--cor2);
+    border: solid, 1px;
+    background-color: var(--cor1);
+    width: 580px;
+    height: 65px;
+    border-radius: 10px ; 
+    font-weight: bold;
+             
+}
+
+#btn-login:hover{
+    background-color: var(--cor2);
+}
+
+.login-footer{
+    color: var(--cor3);
+}
+
+.signup-text a{
+    color: var(--cor3);
+}
+
+.forgot-text{
+    position: relative;
+    top: -20px; 
+    left: 450px;
+}
+
+.forgot-text a{
+    color: var(--cor3);    
+}
+
+
+.contatiner-createPage{
+   display:flex
+
+}
+
+.create-page-logo {
+    width: 50%;
+    height: 100vh;
+    background-color:var(--cor1) ;
+    display: inline-block;
+    border-radius: 200px 0 0 0;
+    text-align:  center;       
+}
+
+
+.register-img{
+    text-align:center;
+    position: relative;
+    top: 60px 
+}
+
+.register-head{
+    position: relative;
+    top: -80px;
+}
+
+.register-head h3{
+    color: var(--cor1);
+    text-align: left;
+    font-size: 48px;
+    font-weight: 900 ;
+}
+
+.register-head p{
+    color: var(--cor3);
+    font-size: 24px;
+    
+}
+
+.form-side{
+    width: 50%;
+    height: 100vh;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.create-form-box{
+    width: 574px;
+    height: 657px;    
+    display: flex;
+    flex-direction: column;
+    color: var(--cor3);
+}
+
+.input-form-create {
+    display: flex;
+    flex: 1;
+    flex-direction: column;   
+}
+
+#username-create{
+    height: 65px;
+    font-size: 30px;  
+    text-align: left;
+    border-radius: 8px;
+}
+#email-create{
+    height: 65px;
+    font-size: 30px;  
+    text-align: left;
+    border-radius: 8px;
+}
+#password-create{
+    height: 65px;
+    font-size: 30px;  
+    text-align: left;
+    border-radius: 8px;
+}
+#passwor-confirmation{
+    height: 65px;
+    font-size: 30px;  
+    text-align: left;
+    border-radius: 8px;
+}
+ 
+ #btn-register{
+     font-size:  calc(var(--base-text-size)*5px);
+     cursor: pointer;
+     color: white;
+     border-color:   var(--cor2);
+     border: solid, 1px;
+     background-color: var(--cor1);
+     width: 580px;
+     height: 65px;
+     border-radius: 10px ; 
+     font-weight: bold;
+              
+ }
+
+ #btn-register:hover{
+    background-color: var(--cor2);
+}
+
+.back-btn a{       
+    color: var(--cor1);
+    text-decoration: none;
+    position: relative;
+    top: 30px;
+    left: 50px;
+    font-weight: 900;
+
+}
