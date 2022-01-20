@@ -11,7 +11,7 @@ class register {
       return res.status(201).json(usersCreateSuccess);
     } catch (error) {
       console.log(error)
-      return res.status(401).json({ error: 'Não foi possivel criar usuario!!' });
+      return res.status(401).json({ error: error.message });
     }
 
   }

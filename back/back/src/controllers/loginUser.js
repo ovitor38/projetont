@@ -9,7 +9,7 @@ class LoginUser {
       return res.status(200).json(verifLogin);
     } catch (error) {
       console.log(error)
-      return res.status(400).json({ error: 'Não foi possivel localizar usuario!!' })
+      return res.status(400).json({ error: error.message })
     }
   }
 

@@ -12,13 +12,19 @@ import RememberCheckbox from '../components/Remember-Checkbox';
 import { Form } from '../components/Form';
 
 import Image from 'next/image'
-import { useState } from 'react';
 import { Header } from 'styled-icons/open-iconic';
 import Script from 'next/script';
+import { useForm } from "react-hook-form";
+import React from "react";
+import { useState } from 'react';
+import { useCallback, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 function Home() {
 
+  const router = useRouter()
   const [formLogin, setFormLogin] = useState({});
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleInput = (event) => {
     const key = event.target.getAttribute('name');
@@ -30,24 +36,27 @@ function Home() {
     })
   }
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-
-    console.log(formLogin);
+  const onSubmit = async (data) => {
 
     try {
-      await fetch("http://localhost:3333/login", {
+      const response = await fetch("http://localhost:3333/login", {
         method: "POST",
-        body: JSON.stringify(formLogin),
-        headers: { 'Content-Type': 'application/json' }
-
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formLogin)
       })
 
+      const [, token] = (await response.json()).split(' ')
+      if (!!token) {
+        localStorage.setItem('token', token)
+        router.push('/welcomePage')
+      }
+      console.log(token)
     } catch (error) {
-      console.log("Não foi possível conectar")
-
+      console.log(error)
     }
+
   }
+
 
   return (
 
@@ -61,30 +70,33 @@ function Home() {
 
       <div className="container-index">
         <Logo logoType="login-logo" classDiv="login-image">
-          <Image
-            src={loginpic}
-          />
-
+          <Image src={loginpic} />
         </Logo>
 
         <LoginBox>
-          <Form onSubmit={onSubmit}>
-            <TitleNDesc className="login-head" title="Login" description="Welcome! log in and take the opportunty to update your to-do list" />
 
+          <TitleNDesc className="login-head" title="Login" description="Welcome! log in and take the opportunty to update your to-do list" />
 
-            <InputForm className="input-form" id="username" type='text' name="username" label="Username" handleInput={handleInput} value={formLogin.username} />
-            <InputForm className="input-form" id="password" type="password" name="password" handleInput={handleInput} value={formLogin.password} label="Password" />
+          <Form onSubmit={handleSubmit(onSubmit)}>
+
+            <InputForm className="input-form" id="username" errors={errors} type='text' options={{ required: { value: true, message: "You need to enter a username" } }}
+              registerForm={register} name="username" label="Username" handleInput={handleInput} value={formLogin.username} />
+
+            <InputForm className="input-form" id="password" errors={errors} type='password' options={{ required: { value: true, message: "You need to enter a password" } }}
+              registerForm={register} name="password" label="Password" handleInput={handleInput} value={formLogin.password} />
+
             <RememberCheckbox />
-            <ProceedBtn divName="btn-container" btnId="btn-login" text="Login" />
 
-            <LoginFooter>
-              <Signup />
-              <ForgotPassword />
-            </LoginFooter>
+            <ProceedBtn divName="btn-container" btnId="btn-login" text="Login" />
           </Form>
+          <LoginFooter>
+            <Signup />
+            <ForgotPassword />
+          </LoginFooter>
+
         </LoginBox>
       </div>
-     
+
 
     </div>
 

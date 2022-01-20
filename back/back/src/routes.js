@@ -17,6 +17,6 @@ router.use((req, res, next) => {
 router.post('/register', register.store)
 router.post('/login',  login.index)
 
-router.post('/login/welcom', authMiddlewares, login.show)
+router.get('users', authMiddlewares, login.show)
 
 module.exports = router;

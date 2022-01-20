@@ -7,14 +7,14 @@ const prisma = new PrismaClient();
 class createUsers {
   
   async createUser(data) {
-    console.log('Aqui', data.username, data.email)
+    console.log('Aqui', data)
      
     if (!data.username) {
-      return 'Username não pode ser null'
+      throw new Error('Username não pode ser null')
     } else if (!data.email) {
-      return 'E-mail não pode ser null'
+      throw new Error('E-mail não pode ser null')
     } else if (data.password !== data.confirmPassword) {
-      return 'Senhas devem ser iguais!!'
+      throw new Error('Senhas devem ser iguais!!')
     }
 
   try {
@@ -34,7 +34,7 @@ class createUsers {
     return createNewUser
   } catch (error) {
       console.log(error)
-      return error.meta.target  + ' já em uso'
+      throw new Error(error.meta.target  + ' já em uso')
     }
   }
 }

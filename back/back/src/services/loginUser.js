@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 class LoginUserServe {
 
   async verifyUser(username, password) {
-    try {
-      console.log(username, password)
+    console.log(username, password)
+    
       const verifyUsername = await prisma.user.findUnique({
         where: {
           username: username
@@ -17,11 +17,11 @@ class LoginUserServe {
       });
 
       if (!verifyUsername) {
-        return `O usuario ${username} não existe`
+        throw new Error( `O usuario ${username} não existe`)
       }
 
       if (!(await bcrypt.compare(String(password), verifyUsername.password))) {
-        return 'A senha incorreta'
+        throw new Error ('A senha incorreta')
       }
 
       const token = jwt.sign(
@@ -32,9 +32,7 @@ class LoginUserServe {
         { expiresIn: config.expireIn }
       )
       return 'token ' + token;
-    } catch (error) {
-      console.log(error)
-    }
+  
   }
 
   async userExists(datas) {
