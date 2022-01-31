@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const register = require('./controllers/registerUsers');
 const login = require('./controllers/loginUser');
 const tagCreate = require("./controllers/tagCreate");
@@ -18,4 +18,9 @@ router.post('/createTask', taskCreate.index)
 
 
 
+router.get("users", login.show);
+
+router.post("/task", task.store);
+router.post("/tag", tag.store);
+router.post("/settings", setting.storage);
 module.exports = router;
