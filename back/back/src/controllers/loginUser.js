@@ -14,9 +14,10 @@ class LoginUser {
   }
 
   async show(req, res) {
-    const { username } = req.body;
+    
     try {
-      const returnUser = await login.userExists(username);
+      const returnUser = req.user
+      //const returnUser = await login.userExists(username);
       return res.status(200).json(returnUser);
     } catch (error) {
       console.log(error)

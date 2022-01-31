@@ -10,32 +10,28 @@ import TitleNDesc from '../components/TitleNDesc';
 import { Form } from '../components/Form';
 
 import { useForm } from "react-hook-form";
-import React from "react";
-import { useState } from 'react';
-import { useCallback, useEffect } from 'react'
+import React, { useState } from "react";
 import { useRouter } from 'next/router'
 
 
 function createAccountPage() {
 
-  
+
   const router = useRouter()
-
-
   const [formLogin, setFormLogin] = useState({});
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const handleInput = (event) => {
     const key = event.target.getAttribute('name');
     const value = event.target.value;
-    console.log(key, value)
+
     setFormLogin({
       ...formLogin,
       [key]: value
     })
   }
 
-  const onSubmit = async (event) => {     
+  const onSubmit = async (event) => {
 
     try {
       const response = await fetch("http://localhost:3333/register", {
@@ -46,20 +42,22 @@ function createAccountPage() {
       })
 
       const message = await response.text();
-      if (response.ok) router.push('/')
-
-      if (!response.ok) throw new Error(JSON.parse(message).error)
-
-      alert('Registrado')
+      if (response.ok) {
+        router.push('/')
+        alert('Registrado')
+      }else{
+        alert(JSON.parse(message).error)
+      }
 
     } catch (error) {
-      console.log(error.message)     
+      console.log(error.message)
     }
   }
 
   const password = watch('password')
-  return (
 
+
+  return (
 
     <div>
       <Head>
@@ -83,16 +81,22 @@ function createAccountPage() {
               registerForm={register} name="username" label="Username" handleInput={handleInput} value={formLogin.username} />
 
 
-            <InputForm className="input-form" id="emailRegister" errors={errors} type='text' options={{ required: { value: true, message: "You need to enter a email" },
-             pattern:{value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i,message: "Enter a valid email"}}}
-              registerForm={register} name="email" label="E-mail" handleInput={handleInput}  value={formLogin.username}/>
+            <InputForm className="input-form" id="emailRegister" errors={errors} type='text' options={{
+              required: { value: true, message: "You need to enter a email" },
+              pattern: { value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i, message: "Enter a valid email" }
+            }}
+              registerForm={register} name="email" label="E-mail" handleInput={handleInput} value={formLogin.email} />
 
-            <InputForm className="input-form" id="passwordRegister" errors={errors} type='password'options={{ required: {value: true, message: "You need to enter a password"}, 
-            minLength: {value: 6, message:"Your password must contain at least 6 characters"}}}
+            <InputForm className="input-form" id="passwordRegister" errors={errors} type='password' options={{
+              required: { value: true, message: "You need to enter a password" },
+              minLength: { value: 6, message: "Your password must contain at least 6 characters" }
+            }}
               registerForm={register} name="password" label="Password" handleInput={handleInput} value={formLogin.password} />
 
-            <InputForm className="input-form" id="passwordConfirmation" errors={errors} type='password' options={{ required: { value: true, message: "You need to enter a password "},
-               validate: (value) => value === password || "Passwords don't match"}}           
+            <InputForm className="input-form" id="passwordConfirmation" errors={errors} type='password' options={{
+              required: { value: true, message: "You need to enter a password " },
+              validate: (value) => value === password || "Passwords don't match"
+            }}
               registerForm={register} name="confirmPassword" label="Confirm Password" handleInput={handleInput} value={formLogin.confirmPassword} />
 
             <ProceedBtn btnId="btn-register" text="Register" />
@@ -102,14 +106,9 @@ function createAccountPage() {
           <Image src={capic} />
         </Logo>
 
-
-
-
       </div>
-
     </div>
-
   )
 }
 
-export default createAccountPage
+export default createAccountPage;

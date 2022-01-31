@@ -1,12 +1,15 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../config/auth');
-const { promisify } = require('util');
+const { PrismaClient } = require(".prisma/client");
+
+const prisma = new PrismaClient();
+
 
 module.exports = async (req, res, next) => {
 
   const auth = req.headers.authorization;
 
-  if(!auth){
+  if (!auth) {
     return res.status(401).json({
       error: true,
       code: 130,
@@ -15,18 +18,25 @@ module.exports = async (req, res, next) => {
   }
 
   const [bearer, token] = auth.split(' ');
-  
   try {
-    const decoded =  await promisify(jwt.verify)(token, config.secret);
+    const decoded = jwt.verify(token, config.secret);
 
-    if(!decoded) {
+    if (!decoded) {
       return res.status(401).json({
         error: true,
         code: 130,
         message: "O token está expirado!!"
       });
     } else {
-      req.user_id = decoded.id;
+     const verifyId = await prisma.user.findUnique({
+        where: {
+          id: decoded.id
+        },
+      });
+      if(!verifyId) throw new Error();    
+      delete verifyId.password
+      
+      req.user = verifyId
       next();
     }
 

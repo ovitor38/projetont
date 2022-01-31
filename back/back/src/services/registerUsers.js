@@ -13,7 +13,9 @@ class createUsers {
       throw new Error('Username não pode ser null')
     } else if (!data.email) {
       throw new Error('E-mail não pode ser null')
-    } else if (data.password !== data.confirmPassword) {
+    } else if (data.password == null || data.password ==  '' || data.password == "") {
+      throw new Error('Senhas não pode estar em branco')
+    } else if (data.password !== data.confirmPassword ) {
       throw new Error('Senhas devem ser iguais!!')
     }
 

@@ -1,0 +1,5 @@
+-- DropForeignKey
+ALTER TABLE "Tag" DROP CONSTRAINT "Tag_tagId_fkey";
+
+-- AddForeignKey
+ALTER TABLE "Tag" ADD CONSTRAINT "Tag_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

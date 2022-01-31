@@ -2,18 +2,46 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id       String @id @default(cuid())
-  username String @unique
-  email    String @unique
+  id       String   @id @default(cuid())
+  username String   @unique
+  email    String   @unique
   password String
-  updateAt    DateTime      @default(now())
-
+  updateAt DateTime @default(now())
+  tasks    Task[]
+  tags     Tag[]
 }
 
+model Task {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  expiresIn   DateTime?
+  updateAt    DateTime @default(now())
+  user        User      @relation(fields: [taskId], references: [id])
+  taskId      String
+  // TaskTag     TaskTag[]
+}
+
+model Tag {
+  id       String   @id @default(cuid())
+  name     String   @unique
+  color    String
+  updateAt DateTime @default(now())
+  user     User     @relation(fields: [tagId], references: [id])
+  tagId    String
+  //TaskTag  TaskTag[]
+}
+
+// model TaskTag {
+//   id      String @id @default(cuid())
+//   tag     Tag    @relation(fields: [tag_id], references: [id])
+//   tag_id  String
+//   task    Task   @relation(fields: [task_id], references: [id])
+//   task_id String
+// }
